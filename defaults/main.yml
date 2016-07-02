@@ -1,0 +1,18 @@
+---
+
+php7_phalcon_php_version: '7.0'
+
+php7_phalcon_packages_state: installed
+
+php7_phalcon_zephir_required_packages:
+  - gcc
+  - make
+  - re2c
+  - libpcre3-dev
+  - "php{{ php7_phalcon_php_version }}-dev"
+  - build-essential
+  - "php{{ php7_phalcon_php_version }}-zip"
+
+php7_phalcon_cli_phalcon_ini: "/etc/php/{{ php7_phalcon_php_version }}/cli/conf.d/20-phalcon.ini"
+php7_phalcon_fpm_phalcon_ini:
+

@@ -1,0 +1,50 @@
+---
+
+- name: Update apt cache.
+  apt: update_cache=yes cache_valid_time=86400
+
+- name: Ensure zephir required packages are installed.
+  apt:
+    name: "{{ item }}"
+    state: "{{ php7_phalcon_packages_state }}"
+  with_items: "{{ php7_phalcon_zephir_required_packages }}"
+
+- name: Install zephir
+  shell: composer global require "phalcon/zephir:1.0.x-dev" -vv
+  become: yes
+
+- name: Git clone cphalcon 2.1.x
+  git:
+    repo: "https://github.com/phalcon/cphalcon.git"
+    version: "2.1.x"
+    depth: 1
+    dest: "~/cphalcon_2.1.x"
+  become: yes
+
+- name: Build cphalcon
+  shell: ~/.composer/vendor/bin/zephir build --backend=ZendEngine3
+  args:
+    chdir: "~/cphalcon_2.1.x"
+  become: yes
+
+- name: Enable phalcon extension for cli
+  lineinfile:
+    dest: "{{ php7_phalcon_cli_phalcon_ini }}"
+    regexp: '^;extension=phalcon.so$'
+    line: 'extension=phalcon.so'
+  when: "{{ php7_phalcon_cli_phalcon_ini }}"
+
+- name: Enable phalcon extension for fpm
+  lineinfile:
+    dest: "{{ php7_phalcon_fpm_phalcon_ini }}"
+    regexp: '^;extension=phalcon.so$'
+    line: 'extension=phalcon.so'
+  when: "{{ php7_phalcon_fpm_phalcon_ini }}"
+
+# - name: Install phalcon dev tool
+#   shell: composer global require "phalcon/devtools:2.1.x-dev" -vv
+#   become: yes
+
+# - name: Make link /usr/bin/phalcon
+#   shell: ln -s ~/.composer/vendor/phalcon/devtools/phalcon.php /usr/bin/phalcon
+#   become: yes
