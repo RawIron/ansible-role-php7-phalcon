@@ -1,4 +1,4 @@
-Role Name
+Ansible Role - php7-phalcon
 =========
 
 [![Build Status](https://travis-ci.org/vkill/ansible-role-php7-phalcon.svg?branch=master)](https://travis-ci.org/vkill/ansible-role-php7-phalcon)
