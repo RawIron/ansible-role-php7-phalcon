@@ -16,5 +16,5 @@
         - php7.1-gd
         - php7.1-curl
     - role: geerlingguy.composer
-    - role: ansible-role-php7-phalcon
+    - role: .
       php7_phalcon_php_version: "7.1"

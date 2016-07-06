@@ -9,8 +9,13 @@ php7_phalcon_zephir_required_packages:
   - make
   - re2c
   - libpcre3-dev
-  - "php{{ php7_phalcon_php_version }}-dev"
   - build-essential
+  - "php{{ php7_phalcon_php_version }}-cli"
+  - "php{{ php7_phalcon_php_version }}-curl"
+  - "php{{ php7_phalcon_php_version }}-gd"
+  - "php{{ php7_phalcon_php_version }}-intl"
+  - "php{{ php7_phalcon_php_version }}-mbstring"
+  - "php{{ php7_phalcon_php_version }}-dev"
   - "php{{ php7_phalcon_php_version }}-zip"
 
 php7_phalcon_cli_phalcon_ini: "/etc/php/{{ php7_phalcon_php_version }}/cli/conf.d/20-phalcon.ini"

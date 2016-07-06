@@ -10,8 +10,7 @@
   with_items: "{{ php7_phalcon_zephir_required_packages }}"
 
 - name: Install zephir
-  shell: composer global require "phalcon/zephir:1.0.x-dev" -vv
-  become: yes
+  shell: composer global require "phalcon/zephir:^0.9" -vv
 
 - name: Git clone cphalcon 2.1.x
   git:
@@ -19,13 +18,17 @@
     version: "2.1.x"
     depth: 1
     dest: "~/cphalcon_2.1.x"
-  become: yes
 
 - name: Build cphalcon
   shell: ~/.composer/vendor/bin/zephir build --backend=ZendEngine3
   args:
     chdir: "~/cphalcon_2.1.x"
-  become: yes
+
+- name: Touch phalcon extension cli ini file
+  file:
+    path: "{{ php7_phalcon_cli_phalcon_ini }}"
+    state: touch
+  when: "{{ php7_phalcon_cli_phalcon_ini }}"
 
 - name: Enable phalcon extension for cli
   lineinfile:
@@ -34,6 +37,12 @@
     line: 'extension=phalcon.so'
   when: "{{ php7_phalcon_cli_phalcon_ini }}"
 
+- name: Touch phalcon extension fpm ini file
+  file:
+    path: "{{ php7_phalcon_fpm_phalcon_ini }}"
+    state: touch
+  when: "{{ php7_phalcon_fpm_phalcon_ini }}"
+
 - name: Enable phalcon extension for fpm
   lineinfile:
     dest: "{{ php7_phalcon_fpm_phalcon_ini }}"
@@ -41,10 +50,8 @@
     line: 'extension=phalcon.so'
   when: "{{ php7_phalcon_fpm_phalcon_ini }}"
 
-# - name: Install phalcon dev tool
-#   shell: composer global require "phalcon/devtools:2.1.x-dev" -vv
-#   become: yes
+- name: Install phalcon dev tool
+  shell: composer global require "phalcon/devtools:2.1.x-dev" -vv
 
-# - name: Make link /usr/bin/phalcon
-#   shell: ln -s ~/.composer/vendor/phalcon/devtools/phalcon.php /usr/bin/phalcon
-#   become: yes
+- name: Make link /usr/bin/phalcon
+  shell: ln -s ~/.composer/vendor/phalcon/devtools/phalcon.php /usr/bin/phalcon
