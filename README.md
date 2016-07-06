@@ -15,7 +15,7 @@ Refer
 Requirements
 ------------
 
-  - `php` (version 7.0+) should be installed and working (you can use `apt-get` to install or use the `geerlingguy.php` role to install).
+  - `php` (= 7.0) should be installed and working (you can use `apt-get` to install or use the `geerlingguy.php` role to install).
   - `composer` should be installed and working (you can `apt-get` to install or use the `geerlingguy.composer` role to install).
   - `git` should be installed and working (you can use `apt-get` to install or the `geerlingguy.git` role to install).
 
