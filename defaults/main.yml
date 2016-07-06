@@ -11,8 +11,8 @@ php7_phalcon_zephir_required_packages:
   - libpcre3-dev
   - build-essential
   - "php{{ php7_phalcon_php_version }}-cli"
-  - "php{{ php7_phalcon_php_version }}-curl"
   - "php{{ php7_phalcon_php_version }}-gd"
+  - "php{{ php7_phalcon_php_version }}-curl"
   - "php{{ php7_phalcon_php_version }}-intl"
   - "php{{ php7_phalcon_php_version }}-mbstring"
   - "php{{ php7_phalcon_php_version }}-xml"

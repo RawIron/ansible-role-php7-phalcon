@@ -47,12 +47,12 @@ Example Playbook
       php_enable_php_fpm: False
       php_enable_webserver: False
       php_packages:
-        - php7.1
-        - php7.1-gd
-        - php7.1-curl
+        - php7.0
+        - php7.0-gd
+        - php7.0-curl
     - role: geerlingguy.composer
     - role: vkill.php7-phalcon
-      php7_phalcon_php_version: "7.1"
+      php7_phalcon_php_version: "7.0"
 ```
 
 Local Testing with Vagrant
