@@ -1,9 +1,11 @@
 Role Name
 =========
 
-A brief description of the role goes here.
+[![Build Status](https://travis-ci.org/vkill/ansible-role-php7-phalcon.svg?branch=master)](https://travis-ci.org/vkill/ansible-role-php7-phalcon)
 
-REF
+PhalconPhp with PHP7 Installation.
+
+Refer
 ------------
 
 * https://gist.github.com/Tosyn/fef6437dd3906ff200e471e478eaae95
@@ -30,30 +32,30 @@ None.
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+```yaml
+- hosts: servers
+  become: true
 
-    - hosts: servers
-      become: true
+  pre_tasks:
+    - name: Add repository for PHP 7
+      apt_repository: repo='ppa:ondrej/php'
+      tags: system
 
-      pre_tasks:
-        - name: Add repository for PHP 7
-          apt_repository: repo='ppa:ondrej/php'
-          tags: system
+  roles:
+    - role: geerlingguy.git
+    - role: geerlingguy.php
+      php_enable_php_fpm: False
+      php_enable_webserver: False
+      php_packages:
+        - php7.1
+        - php7.1-gd
+        - php7.1-curl
+    - role: geerlingguy.composer
+    - role: vkill.php7-phalcon
+      php7_phalcon_php_version: "7.1"
+```
 
-      roles:
-        - role: geerlingguy.git
-        - role: geerlingguy.php
-          php_enable_php_fpm: False
-          php_enable_webserver: False
-          php_packages:
-            - php7.1
-            - php7.1-gd
-            - php7.1-curl
-        - role: geerlingguy.composer
-        - role: ..
-          php7_phalcon_php_version: "7.1"
-
-Vagrant
+Local Testing with Vagrant
 ----------------
 
 * Install some ansible galaxy in your local system
@@ -74,9 +76,11 @@ $ vagrant provision
 License
 -------
 
-BSD
+MIT / BSD
 
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+vkill <vkill.net@gmail.com>
+
+&copy; 2016
