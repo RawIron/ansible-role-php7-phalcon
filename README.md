@@ -5,6 +5,8 @@ Role Name
 
 PhalconPhp with PHP7 Installation.
 
+NOTICE: php7.1 not support!!!
+
 Refer
 ------------
 
