@@ -15,9 +15,14 @@ php7_phalcon_zephir_required_packages:
   - "php{{ php7_phalcon_php_version }}-gd"
   - "php{{ php7_phalcon_php_version }}-intl"
   - "php{{ php7_phalcon_php_version }}-mbstring"
+  - "php{{ php7_phalcon_php_version }}-xml"
   - "php{{ php7_phalcon_php_version }}-dev"
   - "php{{ php7_phalcon_php_version }}-zip"
 
 php7_phalcon_cli_phalcon_ini: "/etc/php/{{ php7_phalcon_php_version }}/cli/conf.d/20-phalcon.ini"
-php7_phalcon_fpm_phalcon_ini:
+php7_phalcon_fpm_phalcon_ini: "/etc/php/{{ php7_phalcon_php_version }}/fpm/conf.d/20-phalcon.ini"
 
+php7_phalcon_enable_cli_ini: True
+php7_phalcon_enable_fpm_ini: False
+
+php7_phalcon_install_devtools: False

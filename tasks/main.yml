@@ -10,48 +10,50 @@
   with_items: "{{ php7_phalcon_zephir_required_packages }}"
 
 - name: Install zephir
-  shell: composer global require "phalcon/zephir:^0.9" -vv
+  shell: composer global require "phalcon/zephir:dev-master" -vv
 
 - name: Git clone cphalcon 2.1.x
   git:
     repo: "https://github.com/phalcon/cphalcon.git"
     version: "2.1.x"
     depth: 1
-    dest: "~/cphalcon_2.1.x"
+    dest: "/opt/cphalcon_2.1.x"
+    force: yes
 
 - name: Build cphalcon
   shell: ~/.composer/vendor/bin/zephir build --backend=ZendEngine3
   args:
-    chdir: "~/cphalcon_2.1.x"
+    chdir: "/opt/cphalcon_2.1.x"
+    warn: false
 
-- name: Touch phalcon extension cli ini file
+- name: Ensure cli phalcon extension ini file exists
   file:
     path: "{{ php7_phalcon_cli_phalcon_ini }}"
     state: touch
-  when: "{{ php7_phalcon_cli_phalcon_ini }}"
+  when: "{{ php7_phalcon_enable_cli_ini }}"
 
-- name: Enable phalcon extension for cli
+- name: Enable phalcon extension for cli ini
   lineinfile:
     dest: "{{ php7_phalcon_cli_phalcon_ini }}"
-    regexp: '^;extension=phalcon.so$'
     line: 'extension=phalcon.so'
-  when: "{{ php7_phalcon_cli_phalcon_ini }}"
+  when: "{{ php7_phalcon_enable_cli_ini }}"
 
-- name: Touch phalcon extension fpm ini file
+- name: Ensure fpm phalcon extension ini file exists
   file:
     path: "{{ php7_phalcon_fpm_phalcon_ini }}"
     state: touch
-  when: "{{ php7_phalcon_fpm_phalcon_ini }}"
+  when: "{{ php7_phalcon_enable_fpm_ini }}"
 
-- name: Enable phalcon extension for fpm
+- name: Enable phalcon extension for fpm ini
   lineinfile:
     dest: "{{ php7_phalcon_fpm_phalcon_ini }}"
-    regexp: '^;extension=phalcon.so$'
     line: 'extension=phalcon.so'
-  when: "{{ php7_phalcon_fpm_phalcon_ini }}"
+  when: "{{ php7_phalcon_enable_fpm_ini }}"
 
 - name: Install phalcon dev tool
   shell: composer global require "phalcon/devtools:2.1.x-dev" -vv
+  when: "{{ php7_phalcon_install_devtools }}"
 
 - name: Make link /usr/bin/phalcon
   shell: ln -s ~/.composer/vendor/phalcon/devtools/phalcon.php /usr/bin/phalcon
+  when: "{{ php7_phalcon_install_devtools }}"
