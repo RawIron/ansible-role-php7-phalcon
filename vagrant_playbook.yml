@@ -33,6 +33,6 @@
         - php7.0-dev
         - php7.0-zip
         - php7.0-fpm
-      php7_phalcon_enable_cli_ini: True
-      php7_phalcon_enable_fpm_ini: True
+      php7_phalcon_enable_for_cli: True
+      php7_phalcon_enable_for_fpm: True
       php7_phalcon_install_devtools: True

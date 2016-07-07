@@ -18,11 +18,15 @@ php7_phalcon_zephir_required_packages:
   - "php{{ php7_phalcon_php_version }}-dev"
   - "php{{ php7_phalcon_php_version }}-zip"
 
-php7_phalcon_cli_phalcon_ini: "/etc/php/{{ php7_phalcon_php_version }}/cli/conf.d/20-phalcon.ini"
-php7_phalcon_fpm_phalcon_ini: "/etc/php/{{ php7_phalcon_php_version }}/fpm/conf.d/20-phalcon.ini"
+php7_phalcon_php_mods_dir: "/etc/php/{{ php7_phalcon_php_version }}/mods-available/"
 
-php7_phalcon_enable_cli_ini: True
-php7_phalcon_enable_fpm_ini: False
+php7_phalcon_cli_confd_dir: "/etc/php/{{ php7_phalcon_php_version }}/cli/conf.d/"
+php7_phalcon_fpm_confd_dir: "/etc/php/{{ php7_phalcon_php_version }}/fpm/conf.d/"
+php7_phalcon_apache2_confd_dir: "/etc/php/{{ php7_phalcon_php_version }}/apache2/conf.d/"
+
+php7_phalcon_enable_for_cli: True
+php7_phalcon_enable_for_fpm: False
+php7_phalcon_enable_for_apache2: False
 
 php7_phalcon_install_devtools: False
 php7_phalcon_devtools_version: "2.1.x-dev"

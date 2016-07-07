@@ -26,29 +26,36 @@
     chdir: "/opt/cphalcon_{{ php7_phalcon_cphalcon_version }}"
     warn: false
 
-- name: Ensure cli phalcon extension ini file exists
+- name: Make php phalcon mod file
+  template:
+    src: phalcon.ini.j2
+    dest: "{{ php7_phalcon_php_mods_dir }}/20-phalcon.ini"
+    owner: root
+    group: root
+
+- name: Enable phalcon extension for cli
   file:
-    path: "{{ php7_phalcon_cli_phalcon_ini }}"
-    state: touch
-  when: "{{ php7_phalcon_enable_cli_ini }}"
+    src: "{{ php7_phalcon_php_mods_dir }}/20-phalcon.ini"
+    dest: "{{ php7_phalcon_cli_confd_dir }}/20-phalcon.ini"
+    state: link
+    force: yes
+  when: "{{ php7_phalcon_enable_for_cli }}"
 
-- name: Enable phalcon extension for cli ini
-  lineinfile:
-    dest: "{{ php7_phalcon_cli_phalcon_ini }}"
-    line: 'extension=phalcon.so'
-  when: "{{ php7_phalcon_enable_cli_ini }}"
-
-- name: Ensure fpm phalcon extension ini file exists
+- name: Enable phalcon extension for fpm
   file:
-    path: "{{ php7_phalcon_fpm_phalcon_ini }}"
-    state: touch
-  when: "{{ php7_phalcon_enable_fpm_ini }}"
+    src: "{{ php7_phalcon_php_mods_dir }}/20-phalcon.ini"
+    dest: "{{ php7_phalcon_fpm_confd_dir }}/20-phalcon.ini"
+    state: link
+    force: yes
+  when: "{{ php7_phalcon_enable_for_fpm }}"
 
-- name: Enable phalcon extension for fpm ini
-  lineinfile:
-    dest: "{{ php7_phalcon_fpm_phalcon_ini }}"
-    line: 'extension=phalcon.so'
-  when: "{{ php7_phalcon_enable_fpm_ini }}"
+- name: Enable phalcon extension for apache2
+  file:
+    src: "{{ php7_phalcon_php_mods_dir }}/20-phalcon.ini"
+    dest: "{{ php7_phalcon_apache2_confd_dir }}/20-phalcon.ini"
+    state: link
+    force: yes
+  when: "{{ php7_phalcon_enable_for_apache2 }}"
 
 - name: Install phalcon dev tool
   shell: composer global require "phalcon/devtools:{{ php7_phalcon_devtools_version }}" -vv
