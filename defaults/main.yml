@@ -1,8 +1,7 @@
 ---
 
-php7_phalcon_php_version: '7.0'
-
-php7_phalcon_packages_state: installed
+php7_phalcon_php_version: "7.0"
+php7_phalcon_cphalcon_version: "2.1.x" # or e62593412d3ca5fa64f53ddd364c1d12c131cff8
 
 php7_phalcon_zephir_required_packages:
   - gcc
@@ -26,3 +25,5 @@ php7_phalcon_enable_cli_ini: True
 php7_phalcon_enable_fpm_ini: False
 
 php7_phalcon_install_devtools: False
+php7_phalcon_devtools_version: "2.1.x-dev"
+
