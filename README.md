@@ -57,6 +57,8 @@ Example Playbook
       php7_phalcon_php_version: "7.0"
 ```
 
+[detailed example](vagrant_playbook.yml)
+
 Local Testing with Vagrant
 ----------------
 
