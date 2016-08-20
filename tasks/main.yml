@@ -23,7 +23,7 @@
 - name: Build cphalcon
   shell: ./install
   args:
-    chdir: "/opt/cphalcon_{{ php7_phalcon_cphalcon_version }}"/build
+    chdir: "/opt/cphalcon_{{ php7_phalcon_cphalcon_version }}/build"
     warn: false
 
 - name: Make php phalcon mod file
