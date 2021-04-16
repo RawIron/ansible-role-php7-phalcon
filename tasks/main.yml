@@ -6,7 +6,7 @@
 - name: Ensure zephir required packages are installed.
   apt:
     name: "{{ item }}"
-    state: "installed"
+    state: present
   with_items: "{{ php7_phalcon_zephir_required_packages }}"
 
 - name: Install zephir
